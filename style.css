@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --pink: #FFB5F6;
+    --blue: #CDF7FF;
+    --default: #f3f3f3F2;
+}
+body {
+    height: 100vh;
+    background-color: var(--default);
+    font-family: Nunito, sans-serif;
+}
+h3 {
+    font-weight: 600;
+}
+.calendar {
+    width: 380px;
+    background-color: var(--default);
+    border-radius: 10px;
+    padding: 1rem;
+    /*legg til en neumorfisk skygge */
+}
+.calendar header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.calendar ul {
+    list-style : none;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.calendar ul li {
+    width: calc(100% / 7);
+    margin-top: 25px;
+    position: relative;
+    z-index: 2;
+}
+#prev, #next {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: none;
+    background: transparent;
+}
+#prev::before, #next::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    border-color: #ccc;
+}
+#next::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+#prev::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+#prev:hover::before,
+#next:hover::before {
+    border-color: #000;
+}
+.days {
+    font-weight: 600;
+}
+.dates li.today {
+    color: #fff;
+}
+.dates li.today::before {
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate((-50%, -50%););
+    background: #000;
+    border-radius: 50%;
+    z-index: -1;  
+}
+days li.inactive {
+    color: #ccc
+}
