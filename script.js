@@ -28,13 +28,14 @@ const months = [
 let date = new Date()
 let month = date.getMonth()
 let year = date.getFullYear()
+const dateNote = document.getElementById('dateNote')
 
 function setEvent(e) {
     dateSelected = e.textContent
     console.log("date selected "+ dateSelected)
     localStorage.setItem('dateNote', dateSelected)
     let dateNote = localStorage.getItem('dateNote')
-    
+
 }
 function renderCalendar() {
 
