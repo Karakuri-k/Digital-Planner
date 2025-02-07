@@ -8,7 +8,7 @@
 
 :root {
     --pink: #FFB5F6;
-    --blue: #CDF7FF;
+    --blue: #c7e9ff;
     --blueDark: #afe0ff;
     --default: #f3f3f3F2;
 }
@@ -141,7 +141,7 @@ h3 {
     left: 50%;
     border-style: solid;
     border-width: 0.25em 0.25em 0 0;
-    border-color: var(--blue);
+    border-color: var(--blueDark);
 }
 
 #next::before {
@@ -179,6 +179,9 @@ h3 {
     border-radius: 50%;
     z-index: -1;
 }
+.dates li.today:hover::before {
+    background: var(--pink);
+}
 
 .dates li.inactive {
     color:#ccc;
@@ -189,7 +192,7 @@ h3 {
     gap: 16px;
     grid-row: 2/3;
     grid-column: 3/4;
-    background-color: var(--blue);
+    background-color: var(--blueDark);
     padding: 1rem;
     background: var(--default);
     border-radius: 16px;

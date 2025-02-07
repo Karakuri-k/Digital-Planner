@@ -42,12 +42,12 @@ function renderCalendar() {
     }
 
     for (let i = 1; i <= endDate; i++) {
-        let className =
-            i === date.getDate() &&
-                month === new Date().getMonth() &&
-                year === new Date().getFullYear()
-                ? ' class="today"'
-                : ""
+        let className = ""
+        if (i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+            className = ' class="today"'
+        } else {
+            className = ""
+        }
         datesHtml += `<li${className}>${i}</li>`
     }
     for (let i = end; i < 6; i++) {
