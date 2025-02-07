@@ -29,6 +29,13 @@ let date = new Date()
 let month = date.getMonth()
 let year = date.getFullYear()
 
+function setEvent(e) {
+    dateSelected = e.textContent
+    console.log("date selected "+ dateSelected)
+    localStorage.setItem('dateNote', dateSelected)
+    let dateNote = localStorage.getItem('dateNote')
+    
+}
 function renderCalendar() {
 
     const start = new Date(year, month, 1).getDay()
@@ -48,7 +55,7 @@ function renderCalendar() {
         } else {
             className = ""
         }
-        datesHtml += `<li${className}>${i}</li>`
+        datesHtml += `<li${className} onClick="setEvent(this)">${i}</li>`
     }
     for (let i = end; i < 6; i++) {
         datesHtml += `<li class="inactive">${i - end + 1}</li>`
@@ -57,7 +64,7 @@ function renderCalendar() {
     dates.innerHTML = datesHtml
     header.textContent = `${months[month]} ${year}`
 }
-navs.forEach((nav) => {
+navs.forEach(function(nav){
     nav.addEventListener('click', (e) => {
         const btnId = e.target.id
 
@@ -95,3 +102,4 @@ window.onload = function () {
     document.getElementById('notes').value = localStorage.getItem('notes')
     console.log("lastet inn")
 }
+
