@@ -32,11 +32,18 @@ const dateNoteCon = document.getElementById('dateNoteCon')
 
 function setEvent(e) {
     dateSelected = e.textContent
-    console.log("date selected "+ dateSelected)
-    localStorage.setItem('dateNoteCon', dateSelected)
     const dateNoteTitle = document.querySelector('#dateNoteCon h2')
     dateNoteTitle.innerHTML = dateSelected
     dateNoteCon.style.display = "flex"
+
+    document.getElementById('dateNote').value = localStorage.getItem(dateSelected)
+
+    document.getElementById("saveNote").addEventListener("click", function () {
+        let dateNote = document.getElementById('dateNote').value
+        localStorage.setItem(dateSelected, dateNote)
+        dateNoteCon.style.display = "none"
+        console.log("funket")
+    }, false)
 
 }
 function renderCalendar() {
@@ -100,17 +107,10 @@ document.getElementById("save").addEventListener("click", function () {
     console.log("funket")
 }, false)
 
-document.getElementById("saveNote").addEventListener("click", function () {
-    let dateNote = document.getElementById('dateNote').value
-    localStorage.setItem('dateNote', dateNote)
-    console.log("funket")
-}, false)
 
 
 window.onload = function () {
     document.getElementById('notes').value = localStorage.getItem('notes')
-    document.getElementById('dateNote').value = localStorage.getItem('dateNote')
-
     console.log("lastet inn")
 }
 
