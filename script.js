@@ -28,14 +28,14 @@ const months = [
 let date = new Date()
 let month = date.getMonth()
 let year = date.getFullYear()
-const dateNote = document.getElementById('dateNote')
+const dateNoteCon = document.getElementById('dateNoteCon')
 
 function setEvent(e) {
     dateSelected = e.textContent
     console.log("date selected "+ dateSelected)
-    localStorage.setItem('dateNote', dateSelected)
-    dateNote.innerHTML = dateSelected
-    dateNote.style.display = 'flex'    
+    localStorage.setItem('dateNoteCon', dateSelected)
+    dateNoteCon.innerHTML = dateSelected
+    dateNoteCon.style.display = 'flex'    
 
 }
 function renderCalendar() {
@@ -99,9 +99,17 @@ document.getElementById("save").addEventListener("click", function () {
     console.log("funket")
 }, false)
 
+document.getElementById("saveNote").addEventListener("click", function () {
+    let dateNote = document.getElementById('dateNote').value
+    localStorage.setItem('dateNote', dateNote)
+    console.log("funket")
+}, false)
+
 
 window.onload = function () {
     document.getElementById('notes').value = localStorage.getItem('notes')
+    document.getElementById('dateNote').value = localStorage.getItem('dateNote')
+
     console.log("lastet inn")
 }
 

@@ -8,8 +8,8 @@
 
 :root {
     --pink: #FFB5F6;
-    --blue: #c7e9ff;
-    --blueDark: #afe0ff;
+    --blue: rgb(199, 233, 255);
+    --blueDark: rgb(175, 224, 255);
     --default: #f3f3f3F2;
 }
 
@@ -223,11 +223,12 @@ textarea#notes{
 textarea:focus {
     outline: none;
 }
-#dateNote {
+#dateNoteCon {
     position: absolute;
     display: none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 75%;
     height: 75%;
     margin: 10% 15% 15% 15%;
@@ -237,3 +238,7 @@ textarea:focus {
     left: 0;
     z-index: 100;
 }
+#dateNote {
+    height: 400px;
+    width: 1000px;
+}   
