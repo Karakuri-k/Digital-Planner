@@ -34,8 +34,9 @@ function setEvent(e) {
     dateSelected = e.textContent
     console.log("date selected "+ dateSelected)
     localStorage.setItem('dateNoteCon', dateSelected)
-    dateNoteCon.innerHTML = dateSelected
-    dateNoteCon.style.display = 'flex'    
+    const dateNoteTitle = document.querySelector('#dateNoteCon h2')
+    dateNoteTitle.innerHTML = dateSelected
+    dateNoteCon.style.display = "flex"
 
 }
 function renderCalendar() {
