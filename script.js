@@ -107,7 +107,25 @@ document.getElementById("save").addEventListener("click", function () {
     console.log("funket")
 }, false)
 
+const taskContainer = document.querySelector("taskContainer")
 
+function newTask() {
+    console.log("trykket på add task")
+    const task = document.createElement("div")
+    taskContainer.appendChild(task)
+    task.classList.add("task")
+
+    const left = document.createElement("div")
+    task.appendChild(left)
+    left.classList.add("left")
+
+    const right = document.createElement("div")
+    task.appendChild(right)
+    right.classList.add(right)
+
+    const taskName = document.createElement("h2")
+
+}
 
 window.onload = function () {
     document.getElementById('notes').value = localStorage.getItem('notes')
