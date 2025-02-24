@@ -11,7 +11,7 @@ const saveNoteButton = document.getElementById("saveNote");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function loadTasks() {
-    taskContainer.innerHTML = ""; // Clear container before reloading
+    taskContainer.innerHTML = "";
     tasks.forEach((task, index) => {
         createTaskElement(task.title, task.description, index);
     });
@@ -22,7 +22,7 @@ function saveTasks() {
 }
 
 function createTaskElement(title, description, index) {
-    if (document.querySelector(`[data-index="${index}"]`)) return; // Prevent duplicates
+    if (document.querySelector(`[data-index="${index}"]`)) return;
 
     const task = document.createElement("div");
     task.classList.add("task");
@@ -57,27 +57,27 @@ function createTaskElement(title, description, index) {
 }
 
 function newTask() {
-    console.log("Add Task clicked");
+    console.log("Add Task clicked")
 
-    const defaultTitle = "New Task";
-    const newTask = { title: defaultTitle, description: "" };
-    tasks.push(newTask);
-    saveTasks();
-    createTaskElement(defaultTitle, "", tasks.length - 1);
+    const defaultTitle = "New Task"
+    const newTask = { title: defaultTitle, description: "" }
+    tasks.push(newTask)
+    saveTasks()
+    createTaskElement(defaultTitle, "", tasks.length - 1)
 }
 
 // Attach the event listener to the addTaskButton
 if (!addTaskButton.dataset.listenerAttached) {
-    addTaskButton.addEventListener("click", newTask);
-    addTaskButton.dataset.listenerAttached = "true";
+    addTaskButton.addEventListener("click", newTask)
+    addTaskButton.dataset.listenerAttached = "true"
 }
 
 function editTask(index) {
-    const newTitle = prompt("Edit Task Title:", tasks[index].title);
+    const newTitle = prompt("Edit Task Title:", tasks[index].title)
     if (newTitle !== null && newTitle.trim() !== "") {
-        tasks[index].title = newTitle;
-        saveTasks();
-        loadTasks();
+        tasks[index].title = newTitle
+        saveTasks()
+        loadTasks()
     }
 }
 
@@ -101,26 +101,26 @@ function deleteTask(index) {
 
 // Fix for the duplicate calendar event listener issue
 function setEvent(e) {
-    dateSelected = e.textContent;
-    const dateNoteTitle = document.querySelector("#dateNoteCon h2");
-    dateNoteTitle.innerHTML = dateSelected;
-    dateNoteCon.style.display = "flex";
+    dateSelected = e.textContent
+    const dateNoteTitle = document.querySelector("#dateNoteCon h2")
+    dateNoteTitle.innerHTML = dateSelected
+    dateNoteCon.style.display = "flex"
 
-    document.getElementById("dateNote").value = localStorage.getItem(dateSelected);
+    document.getElementById("dateNote").value = localStorage.getItem(dateSelected)
 
     // Fix: Remove previous event listeners before adding a new one
-    saveNoteButton.replaceWith(saveNoteButton.cloneNode(true));
+    saveNoteButton.replaceWith(saveNoteButton.cloneNode(true))
     document.getElementById("saveNote").addEventListener("click", function () {
-        let dateNote = document.getElementById("dateNote").value;
-        localStorage.setItem(dateSelected, dateNote);
-        dateNoteCon.style.display = "none";
-    });
+        let dateNote = document.getElementById("dateNote").value
+        localStorage.setItem(dateSelected, dateNote)
+        dateNoteCon.style.display = "none"
+    })
 }
 
 // Fixing the calendar navigation logic
-const header = document.querySelector(".calendar h3");
-const dates = document.querySelector(".dates");
-const navs = document.querySelectorAll("#prev, #next");
+const header = document.querySelector(".calendar h3")
+const dates = document.querySelector(".dates")
+const navs = document.querySelectorAll("#prev, #next")
 
 const months = [
     "January",
@@ -135,68 +135,67 @@ const months = [
     "October",
     "November",
     "December"
-];
+]
 
-let date = new Date();
-let month = date.getMonth();
-let year = date.getFullYear();
+let date = new Date()
+let month = date.getMonth()
+let year = date.getFullYear()
 
 function renderCalendar() {
-    const start = new Date(year, month, 1).getDay();
-    const endDate = new Date(year, month + 1, 0).getDate();
-    const end = new Date(year, month, endDate).getDay();
-    const endDatePrev = new Date(year, month, 0).getDate();
+    const start = new Date(year, month, 1).getDay()
+    const endDate = new Date(year, month + 1, 0).getDate()
+    const end = new Date(year, month, endDate).getDay()
+    const endDatePrev = new Date(year, month, 0).getDate()
 
-    let datesHtml = "";
+    let datesHtml = ""
     for (let i = start; i > 0; i--) {
-        datesHtml += `<li class="inactive">${endDatePrev - i + 1}</li>`;
+        datesHtml += `<li class="inactive">${endDatePrev - i + 1}</li>`
     }
 
     for (let i = 1; i <= endDate; i++) {
         let className = "";
         if (i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
-            className = ' class="today"';
+            className = ' class="today"'
         }
-        datesHtml += `<li${className} onClick="setEvent(this)">${i}</li>`;
+        datesHtml += `<li${className} onClick="setEvent(this)">${i}</li>`
     }
     for (let i = end; i < 6; i++) {
-        datesHtml += `<li class="inactive">${i - end + 1}</li>`;
+        datesHtml += `<li class="inactive">${i - end + 1}</li>`
     }
 
     dates.innerHTML = datesHtml;
-    header.textContent = `${months[month]} ${year}`;
+    header.textContent = `${months[month]} ${year}`
 }
 
 navs.forEach(nav => {
     nav.addEventListener("click", e => {
-        const btnId = e.target.id;
+        const btnId = e.target.id
 
         if (btnId === "prev" && month === 0) {
-            year--;
-            month = 11;
+            year--
+            month = 11
         } else if (btnId === "next" && month === 11) {
-            year++;
-            month = 0;
+            year++
+            month = 0
         } else {
-            month = btnId === "next" ? month + 1 : month - 1;
+            month = btnId === "next" ? month + 1 : month - 1
         }
 
-        date = new Date(year, month, new Date().getDate());
-        year = date.getFullYear();
-        month = date.getMonth();
+        date = new Date(year, month, new Date().getDate())
+        year = date.getFullYear()
+        month = date.getMonth()
 
-        renderCalendar();
-    });
-});
+        renderCalendar()
+    })
+})
 
 renderCalendar();
 
-// Ensure the notes are loaded correctly
 document.getElementById("save").addEventListener("click", function () {
-    let notes = document.getElementById("notes").value;
-    localStorage.setItem("notes", notes);
-}, false);
+    let notes = document.getElementById("notes").value
+    localStorage.setItem("notes", notes)
+}, false)
 
 window.onload = function () {
-    document.getElementById("notes").value = localStorage.getItem("notes");
-};
+    document.getElementById("notes").value = localStorage.getItem("notes")
+}
