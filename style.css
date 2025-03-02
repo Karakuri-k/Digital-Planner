@@ -50,13 +50,13 @@ h3 {
     gap: 16px;
     grid-row: 1/3;
     grid-column: 1/2;
-    background-color: var(--blue);
+
 }
 #addTask {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--pink);
+    background-color: var(--blue);
     padding: 1rem;
     border-radius: 16px;
     /*legg til en neumorfisk skygge */
@@ -67,7 +67,7 @@ h3 {
     gap: 16px;
     grid-row: 1/3;
     grid-column: 1/2;
-    background-color: red;
+
 }
 .task {
     display: flex;
@@ -251,3 +251,6 @@ textarea:focus {
     height: 400px;
     width: 1000px;
 }   
+.check {
+    background-color: red;
+}

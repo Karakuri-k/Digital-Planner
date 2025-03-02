@@ -34,7 +34,7 @@ function createTaskElement(title, description, index) {
     const check = document.createElement("div");
     check.classList.add("check");
     check.addEventListener("click", () => deleteTask(index));
-
+    
     const taskName = document.createElement("h2");
     taskName.textContent = title;
     taskName.addEventListener("click", () => openTaskDetails(index));
