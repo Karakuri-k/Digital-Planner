@@ -66,7 +66,6 @@ function newTask() {
     createTaskElement(defaultTitle, "", tasks.length - 1)
 }
 
-// Attach the event listener to the addTaskButton
 if (!addTaskButton.dataset.listenerAttached) {
     addTaskButton.addEventListener("click", newTask)
     addTaskButton.dataset.listenerAttached = "true"
@@ -99,23 +98,7 @@ function deleteTask(index) {
     loadTasks();
 }
 
-// Fix for the duplicate calendar event listener issue
-function setEvent(e) {
-    dateSelected = e.textContent
-    const dateNoteTitle = document.querySelector("#dateNoteCon h2")
-    dateNoteTitle.innerHTML = dateSelected
-    dateNoteCon.style.display = "flex"
 
-    document.getElementById("dateNote").value = localStorage.getItem(dateSelected)
-
-    // Fix: Remove previous event listeners before adding a new one
-    saveNoteButton.replaceWith(saveNoteButton.cloneNode(true))
-    document.getElementById("saveNote").addEventListener("click", function () {
-        let dateNote = document.getElementById("dateNote").value
-        localStorage.setItem(dateSelected, dateNote)
-        dateNoteCon.style.display = "none"
-    })
-}
 
 // Fixing the calendar navigation logic
 const header = document.querySelector(".calendar h3")
@@ -136,6 +119,26 @@ const months = [
     "November",
     "December"
 ]
+
+function setEvent(e) {
+    dateNoteKey = e.textContent + " " + months[month] + " " + year
+    dateSelected = e.textContent
+    console.log("date selected "+ dateNoteKey)
+    localStorage.setItem('dateNoteKey', dateSelected)
+    const dateNoteTitle = document.querySelector('#dateNoteCon h2')
+    dateNoteTitle.innerHTML = dateSelected
+    dateNoteCon.style.display = "flex"
+
+    document.getElementById('dateNote').value = localStorage.getItem(dateNoteKey)
+
+    document.getElementById("saveNote").addEventListener("click", function () {
+        let dateNote = document.getElementById('dateNote').value
+        localStorage.setItem(dateNoteKey, dateNote)
+        dateNoteCon.style.display = "none"
+        console.log("funket")
+    }, false)
+
+}
 
 let date = new Date()
 let month = date.getMonth()
